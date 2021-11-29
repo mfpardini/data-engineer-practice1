@@ -6,7 +6,7 @@ CREATE TABLE relational.vehicle_status (
 );
 
 CREATE SEQUENCE relational.id_vehicle;
-CREATE TABLE relational.vehicle (
+CREATE TABLE relational.vehicles (
     id int default nextval('relational.id_vehicle'::REGCLASS) PRIMARY KEY,
     acquisition_date date,
     year int,
@@ -18,7 +18,7 @@ CREATE TABLE relational.vehicle (
 );
 
 CREATE SEQUENCE relational.id_client;
-CREATE TABLE relational.client (
+CREATE TABLE relational.clients (
     id int default nextval('relational.id_client'::REGCLASS) PRIMARY KEY,
     name varchar(200),
     birth_date date,
@@ -31,26 +31,26 @@ CREATE TABLE relational.client (
 );
 
 CREATE SEQUENCE relational.id_subsidiary;
-CREATE TABLE relational.subsidiary (
+CREATE TABLE relational.subsidiaries (
     id int default nextval('relational.id_subsidiary'::REGCLASS) PRIMARY KEY,
     name varchar(200),
     address varchar(500)
 );
 
 CREATE SEQUENCE relational.id_dispatcher;
-CREATE TABLE relational.dispatcher (
+CREATE TABLE relational.dispatchers (
     id int default nextval('relational.id_dispatcher'::REGCLASS) PRIMARY KEY,
     name varchar(200),
     status varchar(20),
-    id_subsidiary int REFERENCES relational.subsidiary(id)
+    id_subsidiary int REFERENCES relational.subsidiaries(id)
 );
 
 CREATE SEQUENCE relational.id_rent;
-CREATE TABLE relational.rent (
+CREATE TABLE relational.rents (
     id int default nextval('relational.id_rent'::REGCLASS) PRIMARY KEY,
-    id_vehicle int REFERENCES relational.vehicle(id),
-    id_client int REFERENCES relational.client(id),
-    id_dispatcher int REFERENCES relational.dispatcher(id),
+    id_vehicle int REFERENCES relational.vehicles(id),
+    id_client int REFERENCES relational.clients(id),
+    id_dispatcher int REFERENCES relational.dispatchers(id),
     rent_date date,
     return_date date,
     total_price numeric(12,4)
