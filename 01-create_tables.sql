@@ -17,17 +17,22 @@ CREATE TABLE relational.vehicles (
     daily_rental_price numeric(12,4)
 );
 
+CREATE TABLE relational.client_status (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
 CREATE SEQUENCE relational.id_client;
 CREATE TABLE relational.clients (
     id int default nextval('relational.id_client'::REGCLASS) PRIMARY KEY,
     name varchar(200),
     birth_date date,
-    cpf varchar(11),
-    cnh_number int,
+    cpf varchar(11) unique not null,
+    cnh_number bigint,
     cnh_expiration_date date,
     telephone varchar(20),
     registration_date date,
-    status varchar(20)
+    id_status int REFERENCES relational.client_status(id)
 );
 
 CREATE SEQUENCE relational.id_subsidiary;
@@ -37,11 +42,16 @@ CREATE TABLE relational.subsidiaries (
     address varchar(500)
 );
 
+CREATE TABLE relational.dispatcher_status (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
 CREATE SEQUENCE relational.id_dispatcher;
 CREATE TABLE relational.dispatchers (
     id int default nextval('relational.id_dispatcher'::REGCLASS) PRIMARY KEY,
     name varchar(200),
-    status varchar(20),
+    id_status int REFERENCES relational.dispatcher_status(id),
     id_subsidiary int REFERENCES relational.subsidiaries(id)
 );
 
