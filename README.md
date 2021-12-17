@@ -60,7 +60,7 @@ What the entities must have:
 
 -------
 ##### B) Provide analitical data to managers:
-- Create and dimentional data warehouse with can answer the following questions:
+- Create and dimentional data warehouse that can answer the following questions:
   - Which and how many vehicles were rented with monthly grain;
   - Which dispatchers rented more vehicles with monthly grain;
   - What is the revenue by vehicle with monthly grain;
